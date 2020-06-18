@@ -21,9 +21,12 @@ module.exports = {
     if(!req.isAuth) {
       throw new Error("Sign in/up to create event")
     }
+    console.log(args.eventInput)
+
     // create event using event model
     const event = new Event({
       title: args.eventInput.title,
+      category: args.eventInput.category,
       description: args.eventInput.description,
       price: +args.eventInput.price,
       date: new Date(args.eventInput.date),

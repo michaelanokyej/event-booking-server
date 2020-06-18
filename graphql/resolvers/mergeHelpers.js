@@ -55,6 +55,7 @@ const user = async (userId) => {
 };
 
 const transformEvent = (event) => {
+  console.log("event:", event._doc)
   return {
     ...event._doc,
     _id: event.id,
