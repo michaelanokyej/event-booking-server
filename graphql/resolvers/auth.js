@@ -5,6 +5,7 @@ const User = require("../../models/user");
 
 module.exports = {
   createUser: async (args) => {
+    console.log("createUser:", args)
     try {
       // first verify that user is not already in database
       const existingUser = await User.findOne({ email: args.userInput.email });
@@ -20,7 +21,20 @@ module.exports = {
         password: hashedPassword,
       });
       const result = await user.save();
-      return { ...result._doc, password: null, _id: result.id };
+      const token = await jwt.sign({
+        userId: user.id, email: user.email
+      }, "somesupersecretkey",{
+        expiresIn: "1h"
+      })
+      return {
+        ...result._doc,
+        password: null,
+        userId: result.id,
+        username: result.username,
+      token: token,
+      tokenExpiration: 1
+      }
+      // return { ...result._doc, password: null, _id: result.id };
     } catch (err) {
       throw err;
     }

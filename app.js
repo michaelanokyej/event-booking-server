@@ -27,13 +27,11 @@ app.use((req, res, next) => {
 // data and "mutation" to change data
 
 // GraphQL is a typed language so we have to define the
-// type of endpoints we are goiung to support like what
-// we are doing on line 20
+// type of endpoints we are going to support
 
 // In the type object we define real endpoints
 // we support
 
-// In graphQL, ! means not nullable
 
 // we use the isAuth to check every incoming request
 // that is why we always let requests move on to the next
